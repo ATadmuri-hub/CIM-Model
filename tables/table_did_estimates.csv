@@ -1,0 +1,3 @@
+treated,pre_ctrl,pre_trt,tx_ctrl,tx_trt,post_ctrl,post_trt,DiD_treatment,DiD_post,DiD_placebo
+No Indoor Continuity,0.5575,0.558,0.4957,0.4472,0.5215,0.3746,-0.0491,-0.1474,5e-04
+Winter50,0.5575,0.5578,0.4957,0.4833,0.5215,0.4876,-0.0127,-0.0341,4e-04

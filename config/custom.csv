@@ -1,0 +1,45 @@
+name,value,unit,range,source,description,calibration-tier,scenario-scope
+num-parks,5,count,[3;8],programme design,Number of calisthenics parks in the programme,policy-lever,all
+refugees-per-group,15,count,[6;25],programme design,Migrant participants per park,policy-lever,all
+locals-per-group,5,count,[2;8],programme design,Local participants per park (Baseline); Suboptimal Composition manipulation reduces to 1 per park,policy-lever,all
+sessions-per-week,2,count,fixed,programme protocol,Training sessions per week,policy-lever,all
+session-duration-hours,1.0,hours,fixed,programme protocol,Duration of each training session,policy-lever,all
+group-target-size,11,count,fixed,programme design,Target training group size,policy-lever,all
+annual-budget-per-park,28000,EUR,[20000;40000],programme cost model,Annual EUR budget per park (used by cost-per-retained calculation),heuristic,all
+indoor-season-start,9,week,fixed,Istanbul climate,Winter-season onset week (weeks 9-28 are indoor season),heuristic,all
+indoor-season-end,28,week,fixed,Istanbul climate,Winter-season end week,heuristic,all
+motivation-decay-rate,0.018,per-week,[0.01;0.04],Gjestvang et al. 2020,Gamma: baseline motivation decay rate,empirical,all
+peer-influence-coefficient,0.08,dimensionless,[0.01;0.20],Centola 2010 Science 329:1194-1197,Beta: peer-reinforced motivation coupling coefficient,empirical,all
+motivation-boost-per-session,0.03,scalar,fixed,SDT competence feedback,Motivation increment per attended session,heuristic,all
+dropout-threshold,0.20,scalar,[0.10;0.40],SDT engagement literature; Granovetter threshold,theta_d: motivation threshold below which dropout activates,empirical,all
+tie-formation-probability,0.05,per-session,[0.02;0.15],Kossinets & Watts 2006 Science 311:88-90,p_tie: tie formation probability per session,empirical,all
+refugee-initial-tie-probability,0.20,probability,fixed,initial social-structure assumption,Probability each refugee starts with one same-park tie,heuristic,all
+local-initial-tie-probability,0.15,probability,fixed,initial social-structure assumption,Probability each local starts with one same-park tie,heuristic,all
+initial-tie-strength,0.20,scalar,fixed,network initialisation,Strength assigned to initial ties at t=0,heuristic,all
+tie-strength-growth,0.03,per-week,fixed,social reinforcement theory,Tie strength increment when both ends co-attend,heuristic,all
+language-gain-rate-per-hour,0.019,CEFR/hour,[0.01;0.025],CEFR empirical acquisition rates,Lambda: base language gain per training hour,empirical,all
+language-efficiency-multiplier,0.70,dimensionless,fixed,L2 input efficiency literature,Eta: informal-context discount factor for language gain,empirical,all
+language-friendship-multiplier,1.15,dimensionless,fixed,situated cognition research,Phi_friend: peer translation bonus when local friend attends,empirical,all
+prior-exercise-probability,0.30,probability,fixed,Dishman 1988,Proportion of agents with prior exercise experience,empirical,all
+arrival-cohort-mean-months,12,months,fixed,migration cohort literature,Mean months-in-country for migrants,heuristic,all
+indoor-facility-probability,0.80,probability,fixed,programme design baseline,Probability each park has an indoor winter partner facility; NoIndoor scenarios set to 0.0; Winter50 sets to 0.5,policy-lever,all
+refugee-initial-childcare-prob,0.40,probability,fixed,initial support coverage,Proportion of refugees with childcare at t=0,heuristic,all
+refugee-initial-transport-prob,0.70,probability,fixed,initial support coverage,Proportion of refugees with transport access at t=0,heuristic,all
+local-initial-childcare-prob,0.80,probability,fixed,initial support coverage,Proportion of locals with childcare at t=0,heuristic,all
+local-initial-transport-prob,0.90,probability,fixed,initial support coverage,Proportion of locals with transport access at t=0,heuristic,all
+distance-penalty-500m,0.85,multiplier,fixed,urban planning heuristic,Attendance multiplier for distances 5-7.5 patches,heuristic,all
+female-outdoor-safety-prob,0.20,probability,fixed,Koskela 1999; Phadke et al. 2011,Probability of safety-penalty trigger for women during outdoor season,heuristic,all
+female-outdoor-safety-multiplier,0.90,multiplier,fixed,Koskela 1999,Attendance multiplier when female outdoor safety penalty triggers,heuristic,all
+dropout-prob-motivation,0.20,probability,[0.10;0.35],Granovetter threshold calibration,Per-week dropout probability when motivation below threshold and not attending,empirical,all
+dropout-prob-work-refugee,0.02,probability,fixed,urban migrant employment data,Per-week work-conflict dropout probability (refugees without stipend),heuristic,all
+dropout-prob-work-local,0.01,probability,fixed,urban migrant employment data,Per-week work-conflict dropout probability (locals without stipend),heuristic,all
+dropout-prob-winter,0.05,probability,fixed,seasonal outdoor exercise data,Per-week winter-pause probability for agents at parks without indoor facility,heuristic,all
+dropout-prob-distance-refugee,0.03,probability,fixed,transport barrier studies,Per-week distance dropout probability (refugees beyond 5 patches without transport),heuristic,all
+dropout-prob-distance-local,0.015,probability,fixed,transport barrier studies,Per-week distance dropout probability (locals beyond 5 patches without transport),heuristic,all
+reentry-prob-base,0.25,probability,fixed,Granovetter threshold,Base spring re-entry probability for winter-paused agents,heuristic,all
+reentry-prob-cap,0.70,probability,fixed,Granovetter threshold,Maximum spring re-entry probability (capped regardless of friend count),heuristic,all
+winter-no-return-threshold-weeks,6,weeks,fixed,seasonal cohort attrition,Weeks of failed re-entry attempts before permanent dropout,heuristic,all
+interaction-quality-floor,0.20,scalar,fixed,implementation choice,Minimum value of interaction-quality when computing language gain,heuristic,all
+weak-peer-beta,0.03,dimensionless,fixed,scenario design,Override value of peer-influence-coefficient under Weak Peer Influence scenario,policy-lever,Weak Peer Influence
+inflow-rate-per-week,0.0,probability,fixed,Tier 3 Block J scenario default,Weekly Bernoulli probability of 1 new refugee arrival (0 = closed population; OpenPopulation scenario sets to 0.30),policy-lever,OpenPopulation
+outflow-rate-per-week,0.0,probability,fixed,Tier 3 Block J scenario default,Weekly Bernoulli probability of 1 random active-refugee departure (0 = closed population; OpenPopulation scenario sets to 0.20),policy-lever,OpenPopulation

@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use this model, please cite it as below."
+type: software
+title: "Agent-Based Modeling of Migrant Integration Through Community Sport: Testing Program Design Before Implementation"
+abstract: >
+  Agent-based model of migrant-local social integration through structured
+  calisthenics training in urban public parks, with a second-domain Berlin
+  integration-course calibration for framework-generality testing. Models
+  motivation dynamics, language acquisition, social tie formation, and dropout
+  across 22 scenario conditions and one contextual variable (23 scenarios) over
+  52 weeks (7,500 primary runs + 810 sensitivity + 100 auxiliary + 5,700 Tier 3
+  = 14,110 BehaviorSpace runs total).
+authors:
+  - family-names: Tadmuri
+    given-names: Abdullah
+    affiliation: "UC3M — Universidad Carlos III de Madrid"
+version: "6.4"
+date-released: "2026-06-08"
+license: MIT
+repository-code: "<REPO_URL>"
+keywords:
+  - agent-based modelling
+  - migrant integration
+  - community sport
+  - calisthenics
+  - peer influence
+  - motivation dynamics
+  - Self-Determination Theory
+  - Contact Hypothesis
+  - framework generality
+  - dose-response
+  - network targeting
+  - open-population robustness
+  - link prediction
+  - NetLogo
+  - social simulation

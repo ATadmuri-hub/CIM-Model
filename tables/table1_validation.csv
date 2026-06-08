@@ -1,0 +1,7 @@
+Pattern,Unit,Target.range,Source,Model.value,Status
+Retention at week 52,%,40-60%,Exercise adherence meta-analyses (6-12 months),45.1%,Pass
+Motivation at week 1,"scale [0,1]",0.55-0.75,SDT: moderate intrinsic motivation baseline,0.617,Pass
+Motivation at week 52,"scale [0,1]",0.58-0.80*,SDT: active survivor motivation (survivor selection effect),0.712,Pass
+CEFR gain (weeks 1-52),CEFR units,0.8-1.5,Informal L2 acquisition; CEFR empirical rates,1.05,Pass
+Cross-group tie ratio,"ratio [0,1]",0.30-0.55,Contact Hypothesis: mixed-group formation,0.502,Pass
+Cumulative dropout,%,40-60%,Exercise adherence meta-analysis (1 year),54.9%,Pass

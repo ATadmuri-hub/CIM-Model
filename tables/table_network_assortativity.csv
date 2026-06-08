@@ -1,0 +1,24 @@
+scenario,rho_ses_cross,rho_motiv_cross,rho_dist_cross,rho_lang_cross
+Baseline,0.029,0.428,-0.141,0.12
+No Indoor Continuity,0.057,0.362,-0.12,0.081
+Minimal Support,0.126,0.386,-0.115,0.104
+Low Park Density,0.037,0.432,-0.11,0.122
+Weak Peer Influence,0.04,0.443,-0.137,0.112
+Suboptimal Composition,0.022,0.2,-0.081,0.187
+High SES Heterogeneity,0.074,0.437,-0.151,0.129
+Women-Only Groups,0.036,0.417,-0.177,0.126
+NoIndoor Minimal,0.128,0.314,-0.1,0.08
+Targeting50,0.059,0.419,-0.133,0.113
+Targeting70,0.042,0.417,-0.14,0.114
+Targeting90,0.02,0.429,-0.139,0.117
+BuddyProgram,0.034,0.431,-0.152,0.137
+RotatingGroups,0.043,0.436,-0.062,0.115
+Winter50,0.048,0.41,-0.134,0.125
+WomenChildcare,0.082,0.417,-0.183,0.13
+Composition2,0.028,0.282,-0.103,0.194
+Composition3,0.023,0.34,-0.119,0.171
+Composition4,0.026,0.393,-0.125,0.15
+OpenPopulation,0.037,0.392,-0.123,0.098
+SuboptimalOpen,0.017,0.19,-0.067,0.148
+CentralityBuddy,0.038,0.435,-0.151,0.147
+RandomBuddy,0.033,0.432,-0.148,0.143

@@ -1,0 +1,336 @@
+---
+title: "Community Integration Model (CIM) v6.4"
+subtitle: "Agent-Based Modelling of Migrant Integration Through Community Sport - Abdullah Tadmuri, UC3M"
+format:
+  dashboard:
+    theme: cosmo
+---
+
+```{ojs}
+//| include: false
+scenarios = FileAttachment("data/scenarios.json").json()
+```
+```{ojs}
+//| include: false
+validation = FileAttachment("data/validation.json").json()
+```
+```{ojs}
+//| include: false
+dose = FileAttachment("data/dose.json").json()
+```
+```{ojs}
+//| include: false
+buddy = FileAttachment("data/buddy.json").json()
+```
+```{ojs}
+//| include: false
+traj = FileAttachment("data/trajectories.json").json()
+```
+```{ojs}
+//| include: false
+network = FileAttachment("data/network_baseline.json").json()
+```
+```{ojs}
+//| include: false
+replay = FileAttachment("data/replay_baseline.json").json()
+```
+```{ojs}
+//| include: false
+pal = { return {steel:"#2E86AB", coral:"#E84855", orange:"#F26419", teal:"#44BBA4", maroon:"#9B2335", plum:"#A23B72", grey:"#888888", gold:"#FFBC42"} }
+```
+```{ojs}
+//| include: false
+famColor = { return {confirmatory:"#2E86AB", exploratory:"#44BBA4", robustness:"#A23B72"} }
+```
+```{ojs}
+//| include: false
+metricMeta = { return {participation:{label:"Participation (count)", color:"#2E86AB"}, motivation:{label:"Motivation (0-1)", color:"#F26419"}, language:{label:"Language (CEFR 0-6)", color:"#A23B72"}, integration:{label:"Cross-group tie ratio", color:"#44BBA4"}, dropouts:{label:"Cumulative dropouts", color:"#9B2335"}, cost:{label:"Cost EUR / retained", color:"#888888"}} }
+```
+```{ojs}
+//| include: false
+baseRet = scenarios.find(d => d.scenario === "Baseline").retention
+```
+```{ojs}
+//| include: false
+rankLabel = new Map([["retention","Retention %"],["tie","Cross-group tie ratio"],["cefr","Language (CEFR)"],["motivation","Motivation"],["cost","Cost € / retained"]])
+```
+```{ojs}
+//| include: false
+Scrubber = function (values, {format = v=>v, initial=0, direction=1, delay=null, autoplay=true, loop=true, alternate=false} = {}) {
+  values = Array.from(values);
+  const form = html`<form style="font:12px sans-serif;display:flex;height:33px;align-items:center;">
+    <button name=b type=button style="margin-right:.4em;width:5em;">${autoplay?"Pause":"Play"}</button>
+    <label style="display:flex;align-items:center;">
+      <input name=i type=range min=0 max=${values.length-1} value=${initial} step=1 style="width:220px;">
+      <output name=o style="margin-left:.5em;"></output>
+    </label></form>`;
+  let frame=null, interval=null;
+  function start(){ form.b.textContent="Pause"; if(delay===null) frame=requestAnimationFrame(tick); else interval=setInterval(tick,delay); }
+  function stop(){ form.b.textContent="Play"; if(frame!==null)cancelAnimationFrame(frame),frame=null; if(interval!==null)clearInterval(interval),interval=null; }
+  function running(){ return frame!==null||interval!==null; }
+  function tick(){ if(form.i.valueAsNumber===(direction>0?values.length-1:0)){ if(!loop) return stop(); if(alternate) direction=-direction; } if(delay===null) frame=requestAnimationFrame(tick); step(); }
+  function step(){ form.i.valueAsNumber=(form.i.valueAsNumber+direction+values.length)%values.length; form.i.dispatchEvent(new CustomEvent("input",{bubbles:true})); }
+  form.i.oninput=event=>{ if(event&&event.isTrusted&&running())stop(); form.value=values[form.i.valueAsNumber]; form.o.value=format(form.value, form.i.valueAsNumber, values); };
+  form.b.onclick=()=>{ if(running())return stop(); direction=alternate&&form.i.valueAsNumber===values.length-1?-1:direction; form.i.valueAsNumber=(form.i.valueAsNumber+direction)%values.length; form.i.dispatchEvent(new CustomEvent("input",{bubbles:true})); start(); };
+  form.i.oninput();
+  if(autoplay) start(); else stop();
+  Inputs.disposal(form).then(stop);
+  return form;
+}
+```
+
+# Headline
+
+## {.toolbar}
+
+```{ojs}
+viewof rankMetric = Inputs.select(
+  new Map([["Retention %","retention"],["Cross-group tie ratio","tie"],["Language (CEFR)","cefr"],["Motivation","motivation"],["Cost € / retained","cost"]]),
+  {value:"retention", label:"Rank the 23 scenarios by"})
+```
+
+## Row {height="60%"}
+
+```{ojs}
+//| title: "23 policy scenarios ranked - bars = mean, whiskers = 95% CI, *** = significant vs Baseline (Holm), dashed = Baseline"
+{
+  const m = rankMetric;
+  const lower = (m === "cost");                     // cost: lower is better
+  return Plot.plot({
+    marginLeft: 185, marginRight: 64, height: 500, width: 900,
+    x: {label: rankLabel.get(m) + (lower ? " (lower = better)" : ""), grid: true},
+    y: {label: null},
+    color: {legend: true, domain: Object.keys(famColor), range: Object.values(famColor)},
+    marks: [
+      Plot.barX(scenarios, {x: m, y: "scenario", fill: "family", fillOpacity: 0.85,
+                            sort: {y: "x", reverse: !lower}}),
+      Plot.ruleY(scenarios, {y: "scenario", x1: m+"_lo", x2: m+"_hi", stroke: "#333", strokeWidth: 1}),
+      Plot.ruleX([m === "cost" ? scenarios.find(d=>d.scenario==="Baseline").cost : baseRet].filter(v => m==="retention"||m==="cost"),
+                 {stroke: pal.coral, strokeDasharray: "4,3"}),
+      Plot.text(scenarios, {x: m, y: "scenario", text: d => (m!=="cost" && d.sigm && d.sigm[m] && !["ref",""].includes(d.sigm[m])) ? d.sigm[m] : "",
+                 dx: lower ? -8 : 8, textAnchor: lower ? "end":"start", fill: "#333", fontSize: 10})
+    ]
+  });
+}
+```
+
+## Row {height="40%"}
+
+```{ojs}
+//| title: "Is the model trustworthy? Every output lands inside its real-world plausible range - green band = literature range, dot = model (all 6 PASS)"
+{
+  const rows = validation.map(v => {
+    const t = v.target.replace(/[%*]/g,"").split("-").map(Number);
+    const lo = t[0], hi = t[1], m = parseFloat(v.model);
+    return {pattern:v.pattern, lo, hi, model:m, modelStr:v.model, targetStr:v.target,
+            pos: Math.max(0.02, Math.min(0.98, (m-lo)/(hi-lo)))};
+  });
+  return Plot.plot({
+    height: 250, width: 1380, marginLeft: 175, marginRight: 150, marginTop: 12, marginBottom: 34,
+    x: {domain:[-0.06, 1.06], label:"where the model sits inside the plausible range →",
+        ticks:[0,1], tickFormat:d=> d===0 ? "range min" : "range max"},
+    y: {label:null, domain: rows.map(r=>r.pattern)},
+    marks: [
+      Plot.barX(rows, {y:"pattern", x1:0, x2:1, fill:"#e6f0e6", rx:5}),
+      Plot.ruleX([0,1], {stroke:"#cdcdcd"}),
+      Plot.dot(rows, {y:"pattern", x:"pos", fill:"#2e7d32", r:7, stroke:"#fff", strokeWidth:1.5, tip:true,
+               channels:{pattern:"pattern", model:"modelStr", target:"targetStr"}}),
+      Plot.text(rows, {y:"pattern", x:"pos", text:d=>d.modelStr, dy:-13, fontSize:9.5, fontWeight:"bold", fill:"#2e7d32"}),
+      Plot.text(rows, {y:"pattern", x:1, text:d=>"plausible "+d.targetStr, dx:8, textAnchor:"start", fontSize:8.5, fill:"#888"})
+    ]
+  });
+}
+```
+
+# Policy levers
+
+## Row {height="44%"}
+
+```{ojs}
+//| title: "Cost-effectiveness - cheaper (left) & more effective (up) is better; shaded corner beats Baseline; dashed = Baseline; hover a dot for its scenario"
+{
+  const baseCost = scenarios.find(d=>d.scenario==="Baseline").cost;
+  return Plot.plot({
+    grid: true, height: 380, width: 520,
+    marginTop: 26, marginLeft: 58, marginRight: 44, marginBottom: 42,
+    x: {label: "Cost € / retained →", labelAnchor: "center", domain: [2700, 5300]},
+    y: {label: "↑ Retention %", labelAnchor: "center", domain: [24, 52]},
+    color: {legend: true, domain: Object.keys(famColor), range: Object.values(famColor)},
+    marks: [
+      // Tufte: mark the "good" region - cheaper AND more effective than Baseline
+      Plot.rect([{}], {x1: 2700, x2: baseCost, y1: baseRet, y2: 52, fill: "#2e7d32", fillOpacity: 0.06}),
+      Plot.ruleX([baseCost], {stroke: pal.coral, strokeDasharray:"4,3"}),
+      Plot.ruleY([baseRet], {stroke: pal.coral, strokeDasharray:"4,3"}),
+      // Baseline labelled at the crosshair (it is the dashed-line intersection); all other
+      // identities come from the colour legend + hover tooltip (avoids mislabelling in a dense scatter)
+      Plot.dot(scenarios, {x:"cost", y:"retention", fill:"family", r:4.5, fillOpacity:0.9,
+               stroke:"#fff", strokeWidth:1.4, tip:true,
+               channels:{scenario:"scenario", tie:"tie", cefr:"cefr"}}),
+      Plot.text([{x:2900, y:51.4}], {x:"x", y:"y", text:["↖ cheaper & more effective"],
+               textAnchor:"start", fontSize:9.5, fontWeight:"bold", fill:"#2e7d32"})
+    ]
+  });
+}
+```
+
+```{ojs}
+//| title: "More locals per park → higher retention: each extra local keeps ~4 more people in 100 (shaded = 95% confidence)"
+Plot.plot({
+  height: 360, width: 520, marginLeft: 56, marginRight: 30, marginTop: 30, marginBottom: 46, grid: true,
+  x: {domain:[0.7,5.3], label:"Locals per park →", ticks:[1,2,3,4,5]},
+  y: {label:"↑ Retention % (still active at week 52)", domain:[26, 47]},
+  marks: [
+    Plot.areaY(dose, {x:"dose", y1:"retention_ci_low", y2:"retention_ci_high", fill:pal.steel, fillOpacity:0.15}),
+    Plot.line(dose, {x:"dose", y:"retention_mean", stroke:pal.steel, strokeWidth:2}),
+    Plot.dot(dose, {x:"dose", y:"retention_mean", fill:pal.steel, r:4.5, stroke:"#fff", strokeWidth:1, tip:true, channels:{scenario:"scenario"}}),
+    Plot.text(dose, {x:"dose", y:"retention_mean", text:d=>d3.format(".1f")(d.retention_mean)+"%", dy:-12, fontSize:9.5, fill:"#333"}),
+    // connect the endpoints to the named scenarios used elsewhere
+    Plot.text(dose.filter(d=>d.dose===1), {x:"dose", y:"retention_mean", text:["1 local = Suboptimal"], dy:17, dx:2, fontSize:8.5, fill:"#888", textAnchor:"start"}),
+    Plot.text(dose.filter(d=>d.dose===5), {x:"dose", y:"retention_mean", text:["5 locals = Baseline"], dy:17, dx:-2, fontSize:8.5, fill:"#888", textAnchor:"end"}),
+    // plain-language takeaway in the empty upper-left
+    Plot.text([{x:0.85, y:45}], {x:"x", y:"y", text:["Each extra local per park\n≈ +4.3 pp retention"], textAnchor:"start", fontSize:11, fontWeight:"bold", fill:pal.steel, lineHeight:1.25})
+  ]
+})
+```
+
+## Row {height="56%"}
+
+```{ojs}
+//| title: "Gender equity - female-male dropout gap (pp): dot = mean, line = 95% CI · coral = real gap (CI excludes 0), grey = n.s. · 0 = parity"
+Plot.plot({
+  marginLeft: 150, marginRight: 22, marginTop: 8, marginBottom: 38,
+  height: 480, width: 520, grid: true,
+  x: {label:"female - male dropout gap (pp) →", domain:[-1, 6]},
+  y: {label:null, domain: scenarios.slice().sort((a,b)=>b.gender_gap-a.gender_gap).map(d=>d.scenario)},
+  marks: [
+    Plot.ruleX([0], {stroke:"#888", strokeWidth:1}),
+    Plot.ruleY(scenarios, {y:"scenario", x1:"gap_lo", x2:"gap_hi",
+              stroke:d=>(d.gap_lo>0||d.gap_hi<0)?pal.coral:"#bbb", strokeWidth:1.6}),
+    Plot.dot(scenarios, {x:"gender_gap", y:"scenario",
+              fill:d=>(d.gap_lo>0||d.gap_hi<0)?pal.coral:"#bbb", r:3.6, stroke:"#fff", strokeWidth:0.8,
+              tip:true, channels:{scenario:"scenario", gap:"gender_gap"}})
+  ]
+})
+```
+
+```{ojs}
+//| title: "Buddy programme - retention by pairing window: week-8 (coral) beats week-0 (steel); degree ≈ random; dashed = Baseline"
+{
+  const win = s => s==="Baseline" ? "no buddy" : s==="BuddyProgram" ? "week-0 pairing" : "week-8 pairing";
+  const order = ["RandomBuddy","CentralityBuddy","BuddyProgram","Baseline"];   // best at top
+  const d = scenarios.filter(s=>order.includes(s.scenario)).map(s=>({...s, window: win(s.scenario)}));
+  return Plot.plot({
+    height: 300, width: 540, marginLeft: 118, marginRight: 56, marginTop: 8, marginBottom: 38, grid: true,
+    x: {label:"Retention % →", domain:[44, 52]},
+    y: {label:null, domain: order},
+    color: {legend:true, domain:["week-8 pairing","week-0 pairing","no buddy"], range:[pal.coral, pal.steel, "#bbb"]},
+    marks: [
+      Plot.ruleX([baseRet], {stroke:"#888", strokeDasharray:"4,3"}),
+      Plot.ruleY(d, {y:"scenario", x1:"retention_lo", x2:"retention_hi", stroke:"window", strokeWidth:1.8}),
+      Plot.dot(d, {x:"retention", y:"scenario", fill:"window", r:5, stroke:"#fff", strokeWidth:1, tip:true,
+                   channels:{scenario:"scenario"}}),
+      Plot.text(d, {x:"retention", y:"scenario", text:s=>d3.format(".1f")(s.retention)+"%",
+                   dx:10, textAnchor:"start", fontSize:9.5, fill:"#333"})
+    ]
+  });
+}
+```
+
+# Dynamics
+
+## Row {height="20%"}
+
+```{ojs}
+//| title: "Scenario"
+viewof scen = Inputs.select(Object.keys(traj), {value:"Baseline"})
+```
+```{ojs}
+//| title: "Play the programme year (week 0 → 52)"
+viewof week = Scrubber(d3.range(0,53), {autoplay:false, initial:52, loop:true, delay:140, format:w=>"Week "+w})
+```
+
+## Row {height="80%"}
+
+```{ojs}
+//| title: "Macro dynamics (300-run mean ± SD) - colour = selected scenario, dashed grey = Baseline, dashed vertical = winter onset (wk 9)"
+{
+  const a = traj[scen];
+  const base = traj["Baseline"];
+  function tchart(metric) {
+    const m = metricMeta[metric];
+    const mk = metric+"_mean", sk = metric+"_sd";
+    const rows = a.week.map((w,i)=>({week:w, y:a[mk][i], lo:a[mk][i]-(a[sk][i]||0), hi:a[mk][i]+(a[sk][i]||0)})).filter(d=>d.week<=week);
+    const bl = base.week.map((w,i)=>({week:w, y:base[mk][i]})).filter(d=>d.week<=week);
+    const marks = [
+      Plot.areaY(rows,{x:"week",y1:"lo",y2:"hi",fill:m.color,fillOpacity:0.15}),
+      Plot.ruleX([9],{stroke:"#ccc",strokeDasharray:"3,3"})
+    ];
+    if (scen !== "Baseline") marks.push(Plot.lineY(bl,{x:"week",y:"y",stroke:"#9a9a9a",strokeWidth:1.2,strokeDasharray:"3,2"}));
+    marks.push(Plot.lineY(rows,{x:"week",y:"y",stroke:m.color,strokeWidth:2}));
+    marks.push(Plot.text([{w:rows.length?rows[rows.length-1].week:0, y:rows.length?rows[rows.length-1].y:0}],{x:"w",y:"y",text:d=>d3.format(".2f")(d.y),dx:6,fontSize:10,fill:m.color}));
+    marks.push(Plot.text([m.label],{frameAnchor:"top-left",dy:-14,fontSize:11,fontWeight:"bold"}));
+    return Plot.plot({height:215, width:300, marginLeft:40, marginBottom:28, x:{domain:[0,52],label:"week"}, y:{label:null,nice:true}, marks});
+  }
+  const grid=html`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"></div>`;
+  for(const k of Object.keys(metricMeta)) grid.append(tchart(k));
+  return grid;
+}
+```
+
+# Spatial replay
+
+## Row {height="20%"}
+
+```{ojs}
+//| title: "Baseline programme year - true spatial replay (seed 1, the canonical run)"
+viewof weekS = Scrubber(d3.range(0,53), {autoplay:false, delay:160, loop:true, format:w=>"Week "+w})
+```
+
+## Row {height="80%"}
+
+```{ojs}
+//| title: "World view: ▲ park · ★ trainer · ● migrant (red) / local (blue), brightness = motivation · grey = dropped · orange = winter-paused · orange link = cross-group tie"
+{
+  const r=replay, W=600, H=600, pad=22, sc=(W-2*pad)/r.world;
+  const SX=v=>pad+v*sc, SY=v=>pad+(r.world-v)*sc;
+  const pos=new Map(r.id.map((id,i)=>[id,{x:SX(r.x[i]),y:SY(r.y[i]),kind:r.kind[i]}]));
+  const svg=d3.create("svg").attr("viewBox",[0,0,W,H]).attr("width",W).attr("height",H).attr("style","max-width:100%;height:auto;background:#fff;border:1px solid #e3e3e3;font:11px sans-serif");
+  const E=r.edges[weekS].filter(e=>pos.has(e[0])&&pos.has(e[1]));
+  svg.append("g").selectAll("line").data(E).join("line").attr("x1",e=>pos.get(e[0]).x).attr("y1",e=>pos.get(e[0]).y).attr("x2",e=>pos.get(e[1]).x).attr("y2",e=>pos.get(e[1]).y).attr("stroke",e=>+e[2]?pal.orange:pal.grey).attr("stroke-width",e=>+e[2]?2:0.7).attr("stroke-opacity",0.8);
+  const mot=r.mot[weekS], stt=r.state[weekS];
+  const g=svg.append("g").selectAll("g").data(d3.range(r.id.length)).join("g").attr("transform",i=>`translate(${pos.get(r.id[i]).x},${pos.get(r.id[i]).y})`);
+  g.each(function(i){ const k=r.kind[i], s=stt[i], m=mot[i], sel=d3.select(this);
+    if(k==="park"){ sel.append("text").text("▲").attr("text-anchor","middle").attr("dy",5).attr("font-size",18).attr("fill","#2e7d32"); return; }
+    if(k==="trainer"){ sel.append("text").text("★").attr("text-anchor","middle").attr("dy",5).attr("font-size",15).attr("fill",pal.gold); return; }
+    let col=s===2?"#bdbdbd":s===1?pal.orange:(k==="migrant"?d3.interpolateRgb("#7a0010","#ff8a8a")(m):d3.interpolateRgb("#0a2a44","#7fc0ec")(m));
+    sel.append("circle").attr("r",s===2?3:4.5).attr("fill",col).attr("stroke","#fff").attr("stroke-width",0.6);
+  });
+  const active=stt.filter((s,i)=>s===0&&(r.kind[i]==="migrant"||r.kind[i]==="local")).length;
+  const dropped=stt.filter(s=>s===2).length, cross=E.filter(e=>+e[2]).length;
+  svg.append("text").attr("x",12).attr("y",18).attr("font-weight","bold").text(`Week ${weekS}   ·   active ${active}   ·   dropped ${dropped}   ·   cross-group ties ${cross}`);
+  return svg.node();
+}
+```
+
+# Data & provenance
+
+## Row
+
+```{ojs}
+//| title: "All 23 scenarios (pinned values from the verified pipeline)"
+Inputs.table(scenarios.slice().sort((a,b)=>b.retention-a.retention), {
+  columns:["scenario","family","retention","tie","cefr","cost","gender_gap","sig"],
+  header:{scenario:"Scenario", family:"Family", retention:"Retention %", tie:"Tie ratio", cefr:"CEFR", cost:"€/retained", gender_gap:"Gender gap", sig:"vs Baseline"},
+  rows: 24
+})
+```
+
+::: {.card title="Provenance - every number traces to a pinned table; the dashboard computes no new statistics"}
+- **Ranking / cost / tie / CEFR / motivation:** `tables/table_cost_effectiveness.csv` + `tables/table2_descriptive.csv` (pinned v6.4; Baseline retention **45.1%**, cross-tie **0.502**, CEFR **1.05**, cost **€3155** - matching the thesis validation table).
+- **Significance (\*\*\*):** `tables/table3_hypothesis_tests.csv`, Holm-corrected, retention vs Baseline.
+- **Dose-response:** `tables/table_dose_response.csv`. **Gender gap:** `tables/table_equity_gender.csv`. **Validation:** `tables/table1_validation.csv` (all 6 PASS).
+- **Dynamics & replay:** per-run `data/<scenario>/CIM_timeseries_*.csv` (300-run mean ± SD) and `CIM_edges_Baseline_1.csv` / the seed-1 spatial export.
+- 95% CI = mean ± 1.96·SE, SE from each table's reported SD/n. The NetLogo model is unchanged and bit-for-bit reproducible.
+- **Synthetic simulation.** All figures describe the behaviour of a calibrated agent-based model, not real individuals; no personal data is used or shown.
+:::
+

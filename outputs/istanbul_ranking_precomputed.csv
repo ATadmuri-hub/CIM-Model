@@ -1,0 +1,17 @@
+"scenario","retention","retention_sd","n","domain","rank"
+"High SES Heterogeneity",48.5333333333333,5.4670391694062,300,"Istanbul-calisthenics",1
+"BuddyProgram",48.3333333333333,5.69887234831273,300,"Istanbul-calisthenics",2
+"WomenChildcare",45.6066666666667,5.08509089268275,300,"Istanbul-calisthenics",3
+"Baseline",44.27,5.3214810471444,300,"Istanbul-calisthenics",4
+"Women-Only Groups",44.102,5.31149885061459,500,"Istanbul-calisthenics",5
+"Targeting90",42.58,4.90685139732716,300,"Istanbul-calisthenics",6
+"Low Park Density",42.532,5.53988778888407,500,"Istanbul-calisthenics",7
+"RotatingGroups",42.0233333333333,5.19159233686508,300,"Istanbul-calisthenics",8
+"Weak Peer Influence",41.882,5.17083659596824,500,"Istanbul-calisthenics",9
+"Targeting70",41.8633333333333,5.12629677424301,300,"Istanbul-calisthenics",10
+"Winter50",41.74,4.89000071814017,300,"Istanbul-calisthenics",11
+"Targeting50",40.8433333333333,4.99619810863132,300,"Istanbul-calisthenics",12
+"Minimal Support",36.77,4.57897258853503,300,"Istanbul-calisthenics",13
+"No Indoor Continuity",33.6433333333333,4.60581160680869,300,"Istanbul-calisthenics",14
+"NoIndoor Minimal",28.2466666666667,4.04148498597505,300,"Istanbul-calisthenics",15
+"Suboptimal Composition",28.1566666666667,5.07259561860809,300,"Istanbul-calisthenics",16

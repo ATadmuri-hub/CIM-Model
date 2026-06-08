@@ -1,0 +1,161 @@
+% UC3M Plantilla_TFM_ingles_2019 — cover page + summary + dedication
+% Goes into `\begin{document}` via pandoc `includes.before_body`
+
+\pagenumbering{roman} % Front matter uses roman numerals per template
+
+%----------
+% COVER PAGE (titlepage)
+%----------
+\begin{titlepage}
+  \begin{sffamily}
+    \color{azulUC3M}
+    \begin{center}
+      \vspace*{0.5cm}
+      \makebox[\textwidth][c]{\includegraphics[width=11cm]{imagenes/Portada_Logo.png}}
+      \vspace{0.8cm}
+
+      {\Large
+        Master's Degree in Computational Social Science\\
+        Academic Year 2025--2026\\
+      }
+      \vspace{0.6cm}
+      {\Large \textsl{Master's Thesis}}
+      \vspace{0.8cm}
+
+      {\LARGE\bfseries Agent-Based Modeling of Migrant Integration\\ Through Community Sport}\\
+      \vspace*{0.35cm}
+      {\large Testing Program Design Before Implementation}\\
+      \vspace*{0.45cm}
+      \rule{10cm}{0.1mm}\\
+      \vspace*{0.6cm}
+      {\Large Abdullah Tadmuri}\\
+      \vspace*{0.7cm}
+      {\large
+        Tutor: Prof.\ Anxo S\'{a}nchez\\
+        Universidad Carlos III de Madrid\\
+        Madrid, July 2026\\
+      }
+    \end{center}
+
+    \vfill
+    \color{black}
+    \begin{footnotesize}
+      \noindent\fbox{%
+        \begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule}
+          \textbf{AVOID PLAGIARISM}\\
+          The University uses the \textbf{Turnitin Feedback Studio} program within the Aula Global for the delivery of student work. This program compares the originality of the work delivered by each student with millions of electronic resources and detects those parts of the text that are copied and pasted. Plagiarising in a TFM is considered a \textbf{Serious Misconduct} and may result in permanent expulsion from the University.
+        \end{minipage}%
+      }\\[0.3cm]
+      \noindent\includegraphics[width=3.8cm]{imagenes/creativecommons.png}\\
+      This work is licensed under Creative Commons \textbf{Attribution -- Non Commercial -- Non Derivatives}.
+    \end{footnotesize}
+  \end{sffamily}
+\end{titlepage}
+
+\newpage\thispagestyle{empty}\mbox{}
+
+%----------
+% ABSTRACT + KEYWORDS
+%----------
+\clearpage
+\chapter*{\uppercase{Abstract}}
+\addcontentsline{toc}{chapter}{Abstract}
+\thispagestyle{plain}
+
+  This thesis develops a generalisable agent-based framework for testing community-sport integration programmes and validates it against an Istanbul-calibrated case of migrant--local integration through shared calisthenics training in urban public parks (2013--2022). The \emph{Calisthenics Integration Model} (CIM v6.4) simulates heterogeneous agents across 22 scenario conditions plus one contextual variable over one year (52 weeks) at 14{,}110 BehaviorSpace runs (7{,}500 main pipeline, 810 sensitivity, 100 auxiliary, 5{,}700 Tier 3 framework-generality), modelling motivation dynamics, language acquisition, social tie formation, and programme dropout. Drawing on Self-Determination Theory, the Contact Hypothesis, Vygotsky's Zone of Proximal Development, and Granovetter's threshold framework, four confirmatory hypotheses on peer influence, group composition, indoor facility continuity, and support services are tested, plus eleven exploratory interventions and seven Phase 3 robustness extensions. Group composition and indoor facility continuity have the strongest effects: suboptimal composition reduces retention by 17.2 percentage points (Cohen's $d = -3.31$), loss of indoor winter facilities by 10.9 percentage points ($d = -2.13$). A Phase 3 dose-response sweep (locals-per-park $\in \{1, 2, 3, 4, 5\}$) confirms the composition effect is monotonic at $+4.31$ percentage points retention per additional local (Kendall's $\tau = 0.621$, $p < 10^{-4}$; linear specification preferred over quadratic, $\Delta\text{AIC} = -1.96$). A 4-way buddy-design verification (BuddyProgram week-0 by distance vs CentralityBuddy week-8 by degree vs RandomBuddy week-8 by random selection vs Baseline) shows the $+2.1$ pp retention uplift reflects pairing \emph{time} (week 8 vs week 0), not pairing \emph{criterion} (degree vs random): CentralityBuddy and RandomBuddy are statistically indistinguishable on every outcome ($d = -0.012$, $p_{\text{Holm}} = 1.00$). A contact-presence contagion benchmark shows the peer-influence mechanism is non-equifinal ($d = 2.24$). Open-population robustness shows that six graph-structure metrics (Louvain modularity, clustering, giant-component fraction, breed assortativity, within- and cross-group tie strengths) are invariant to churn while quantitative outcomes (retention, language gain) shift mechanically; the Baseline-vs-Suboptimal ranking is empirically preserved under open population. A static link-prediction validation shows the network module produces triadic-closure structure (AUC $\approx 0.75$) with no preferential-attachment signal. Global sensitivity analysis identifies motivation decay rate $\gamma$ as the dominant parameter ($\text{PRCC} = -0.96$). A Berlin integration-course second-domain test transfers only two of four fully-testable ranking relations: the gross provide-versus-withhold-support distinction holds in both domains, but the two peer-mediated relations -- the group-composition gap ($d = -3.31$ in Istanbul) and the BuddyProgram premium over Baseline -- collapse to near-ties in Berlin. The peer-mediated mechanisms require peer-influence-driven dropout to engage, bounding the rankings to peer-reinforced venues rather than funding-enforced ones. Results are scoped to adult migrants under Turkey's Temporary Protection Regulation who are candidates for outdoor community-sport programmes; the simulator is framed as a tool for comparing programme designs before implementation rather than a forecasting instrument.
+
+  \textbf{Keywords:} peer influence; motivation dynamics; Self-Determination Theory; Contact Hypothesis; social network analysis.
+
+\newpage\thispagestyle{empty}\mbox{}
+
+%----------
+% ACKNOWLEDGEMENTS
+%----------
+\clearpage
+\thispagestyle{plain}
+\chapter*{\uppercase{Acknowledgements}}
+\addcontentsline{toc}{chapter}{Acknowledgements}
+
+This thesis is the end of a long road, and not a straight one. After fleeing Syria's civil war and missing more than four years of school, returning to education felt almost impossible at first. But I rebuilt it step by step: first in Istanbul, then through Erasmus, and finally here in Madrid. Some days it still feels like yesterday that I was starting over with nothing but the will to keep going.
+
+There is something fitting in where this thesis ended up. I have written about migrants finding their footing in Istanbul's calisthenics parks, but in truth I have also been writing about myself. Those shared bars, and the quiet welcome among strangers who spoke different languages, were never only my data; for a while, they were my home. To everyone who trained beside me there: this work is yours as much as mine.
+
+To my tutor, Prof.\ Anxo S\'{a}nchez, thank you for trusting both an unconventional idea and an unconventional student, and for your patience and guidance throughout. To UC3M and the Computational Social Science programme, thank you for the foundation you have given me, and for opening a door I had once thought was closed for good.
+
+Above all, to my mother: your quiet strength carried me when I could not carry myself. To my father, and to everyone I love and who has loved me across miles and borders, thank you. I carry it with me, always.
+
+\newpage\thispagestyle{empty}\mbox{}
+
+%----------
+% DEDICATION
+%----------
+\clearpage
+\thispagestyle{plain}
+\vspace*{6cm}
+\begin{center}
+  \itshape
+  To the refugees and locals of Istanbul's calisthenics parks,\\
+  who trained side by side when institutions could not yet match them.
+\end{center}
+\vfill
+
+\newpage\thispagestyle{empty}\mbox{}
+
+%----------
+% TABLE OF CONTENTS, LIST OF FIGURES, LIST OF TABLES
+%----------
+\clearpage
+\tableofcontents
+\thispagestyle{fancy}
+
+\newpage\thispagestyle{empty}\mbox{}
+
+\clearpage
+\listoffigures
+\thispagestyle{fancy}
+
+\newpage\thispagestyle{empty}\mbox{}
+
+\clearpage
+\listoftables
+\thispagestyle{fancy}
+
+\newpage\thispagestyle{empty}\mbox{}
+
+%----------
+% LIST OF ABBREVIATIONS
+%----------
+\clearpage
+\chapter*{\uppercase{List of Abbreviations}}
+\addcontentsline{toc}{chapter}{List of Abbreviations}
+\thispagestyle{fancy}
+
+\begin{tabular}{@{}p{2.2cm}l@{}}
+AIC  & Akaike Information Criterion\\
+AUC  & Area Under the ROC Curve\\
+CEFR & Common European Framework of Reference for Languages\\
+CI   & Confidence Interval\\
+CIM  & Calisthenics Integration Model\\
+DiD  & Difference-in-Differences\\
+IQR  & Interquartile Range\\
+KM   & Kaplan--Meier estimator\\
+LRT  & Likelihood-Ratio Test\\
+ODD  & Overview, Design concepts, and Details protocol\\
+PRCC & Partial Rank Correlation Coefficient\\
+RI   & Randomization Inference\\
+SD   & Standard Deviation\\
+SDT  & Self-Determination Theory\\
+SE   & Standard Error\\
+SES  & Socioeconomic Status\\
+SNA  & Social Network Analysis\\
+TOST & Two One-Sided Tests (equivalence)\\
+ZPD  & Zone of Proximal Development\\
+\end{tabular}
+
+\newpage\thispagestyle{empty}\mbox{}
+
+%----------
+% Main body: switch to arabic numbering
+%----------
+\clearpage
+\pagenumbering{arabic}

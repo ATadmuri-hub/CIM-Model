@@ -1,0 +1,45 @@
+name,value,unit,range,source,description,calibration-tier,scenario-scope
+num-parks,5,count,[3;8],programme design,Number of integration-course classrooms in the programme,policy-lever,all
+refugees-per-group,20,count,[15;25],BAMF integration course typical class size,Adult refugee participants per classroom,policy-lever,all
+locals-per-group,1,count,fixed,BAMF course structure,Instructor per classroom (teachers not peer locals),policy-lever,all
+sessions-per-week,4,count,fixed,BAMF part-time integration course schedule,Language sessions per week,policy-lever,all
+session-duration-hours,3.0,hours,fixed,BAMF integration course typical,Duration of each classroom session,policy-lever,all
+group-target-size,21,count,fixed,BAMF class size norm (20 students + 1 teacher),Target classroom size,policy-lever,all
+annual-budget-per-park,45000,EUR,[35000;60000],BAMF per-student funding ~EUR 2100 x 20 students,Annual EUR budget per classroom,heuristic,all
+indoor-season-start,0,week,fixed,Indoor classroom; no seasonality,Winter-season onset week (0 = no seasonal regime change),heuristic,all
+indoor-season-end,0,week,fixed,Indoor classroom; no seasonality,Winter-season end week,heuristic,all
+motivation-decay-rate,0.015,per-week,[0.008;0.030],Kosyakova 2022 IAB-BAMF-SOEP cohort,Lower than calisthenics because BAMF funding enforces attendance,empirical,all
+peer-influence-coefficient,0.08,dimensionless,[0.02;0.15],Centola 2010 Science 329:1194-1197,Transferred (social-contagion venue-independent),empirical,all
+motivation-boost-per-session,0.02,scalar,fixed,SDT competence feedback scaled for longer class,Slightly lower than calisthenics (3-hour class more cognitively demanding),heuristic,all
+dropout-threshold,0.15,scalar,[0.10;0.25],BAMF funding-conditional enrolment,Lower because BAMF funding enforces attendance,empirical,all
+tie-formation-probability,0.07,per-session,[0.04;0.12],Kossinets Watts 2006 adapted,Higher than calisthenics; classroom close contact facilitates ties,empirical,all
+refugee-initial-tie-probability,0.15,probability,fixed,pre-arrival-cluster literature,Probability of same-class tie at t=0,heuristic,all
+local-initial-tie-probability,0.0,probability,fixed,Teachers have no peer ties at t=0,Teachers start with no prior ties,heuristic,all
+initial-tie-strength,0.20,scalar,fixed,network initialisation,Strength assigned to initial ties at t=0,heuristic,all
+tie-strength-growth,0.04,per-week,fixed,classroom rapport literature,Slightly higher than calisthenics,heuristic,all
+language-gain-rate-per-hour,0.024,CEFR/hour,[0.020;0.030],Kosyakova 2022: ~1 CEFR level per 7 months,Substantially higher; formal instruction is primary design,empirical,all
+language-efficiency-multiplier,0.95,dimensionless,fixed,L2 formal-instruction efficiency,Much higher than 0.70 informal-context discount,heuristic,all
+language-friendship-multiplier,1.10,dimensionless,fixed,situated cognition research,Slightly lower; formal instruction reduces peer-translation need,heuristic,all
+prior-exercise-probability,0.25,probability,fixed,Kosyakova 2022 prior education proxy,Proportion with prior partial language exposure,heuristic,all
+arrival-cohort-mean-months,18,months,fixed,BAMF course typical enrolment timing,Mean months-in-country for new enrolees,heuristic,all
+indoor-facility-probability,1.0,probability,fixed,All BAMF courses indoor,Always indoor,heuristic,all
+refugee-initial-childcare-prob,0.40,probability,fixed,transferred from calisthenics,Initial childcare coverage for refugees,heuristic,all
+refugee-initial-transport-prob,0.85,probability,fixed,Berlin urban transit access,Higher than Istanbul because of Berlin transit density,heuristic,all
+local-initial-childcare-prob,0.80,probability,fixed,not directly applicable to teachers,Retained for model compatibility,heuristic,all
+local-initial-transport-prob,0.95,probability,fixed,Berlin urban transit for teachers,Teacher transport access,heuristic,all
+distance-penalty-500m,0.90,multiplier,fixed,Berlin public transit compensation,Less harsh than Istanbul,heuristic,all
+female-outdoor-safety-prob,0.0,probability,fixed,Indoor classroom; no safety penalty,0 = no outdoor exposure,heuristic,all
+female-outdoor-safety-multiplier,1.0,multiplier,fixed,Indoor; safety neutralised,1.0 = no effect,heuristic,all
+dropout-prob-motivation,0.15,probability,[0.08;0.25],Kosyakova 2022 attendance-trajectory,Per-week dropout prob when below threshold,empirical,all
+dropout-prob-work-refugee,0.025,probability,fixed,3-hour daily class balance,Per-week work-conflict dropout for refugees,heuristic,all
+dropout-prob-work-local,0.01,probability,fixed,teacher turnover baseline,Per-week work-conflict dropout for teachers,heuristic,all
+dropout-prob-winter,0.0,probability,fixed,Indoor classroom,0 = never fires in this domain,heuristic,all
+dropout-prob-distance-refugee,0.02,probability,fixed,Berlin urban transit compensates,Per-week distance dropout for refugees,heuristic,all
+dropout-prob-distance-local,0.01,probability,fixed,teacher transport access,Per-week distance dropout for teachers,heuristic,all
+reentry-prob-base,0.30,probability,fixed,BAMF re-enrolment pathways,Higher than calisthenics; formal re-entry mechanisms,heuristic,all
+reentry-prob-cap,0.75,probability,fixed,BAMF re-enrolment cap,Maximum re-entry probability,heuristic,all
+winter-no-return-threshold-weeks,0,weeks,fixed,no winter window,0 = not applicable,heuristic,all
+interaction-quality-floor,0.5,scalar,fixed,Teachers always present,Much higher than 0.20 calisthenics floor,heuristic,all
+weak-peer-beta,0.03,dimensionless,fixed,scenario design transferred,Under Weak Peer Influence scenario,policy-lever,Weak Peer Influence
+inflow-rate-per-week,0.0,probability,fixed,Tier 3 Block J default,0 = closed population,policy-lever,OpenPopulation
+outflow-rate-per-week,0.0,probability,fixed,Tier 3 Block J default,0 = closed population,policy-lever,OpenPopulation

@@ -1,0 +1,4 @@
+"gamma","scenario","retention_mean","retention_sd","n_runs"
+0.018,"Baseline",44.27,5.3214810471444,300
+0.018,"BuddyProgram",48.3333333333333,5.69887234831273,300
+0.018,"Suboptimal Composition",28.1566666666667,5.07259561860809,300

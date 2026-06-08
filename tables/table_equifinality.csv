@@ -1,0 +1,8 @@
+metric,baseline_mean,baseline_sd,equifin_mean,equifin_sd,diff,cohens_d,p_value
+Retention rate (%),45.067,5.533,57.53,5.579,12.463,2.243,0
+Avg motivation (0–1),0.712,0.051,0.875,0.033,0.163,3.79,0
+Avg language (CEFR),1.046,0.141,1.059,0.103,0.013,0.106,0.3187
+Cross-group tie ratio,0.502,0.076,0.504,0.055,0.003,0.039,0.7137
+Cost per retained (€),3155.368,405.376,2456.371,239.669,-698.997,-2.099,0
+Female dropout rate (%),56.325,7.186,43.334,7.625,-12.991,-1.753,0
+Male dropout rate (%),53.583,7.626,41.603,7.269,-11.98,-1.608,0
