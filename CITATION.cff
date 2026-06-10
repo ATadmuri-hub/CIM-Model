@@ -13,9 +13,9 @@ abstract: >
 authors:
   - family-names: Tadmuri
     given-names: Abdullah
-    affiliation: "UC3M — Universidad Carlos III de Madrid"
+    affiliation: "UC3M, Universidad Carlos III de Madrid"
 version: "6.4"
-date-released: "2026-06-08"
+date-released: "2026-06-10"
 license: MIT
 repository-code: "<REPO_URL>"
 keywords:

@@ -181,7 +181,7 @@ Trigger 3 is a temporary winter pause rather than a permanent exit. A paused age
 
 ## Initialisation
 
-Support services are allocated in three tiers based on SES: agents with SES < 0.3 receive stipend, childcare, and transport; moderate SES (0.3--0.6) receive childcare and 50% chance of transport; high SES receive no support. Additionally, agents living more than 5 patches from their park receive transport and stipend regardless of SES.
+Support services are allocated in three tiers based on SES: agents with SES < 0.3 receive stipend, childcare, and transport; moderate SES (0.3--0.6) receive childcare and 50% chance of transport; high SES receive no support. Agents living more than 5 patches from their park also receive transport and stipend regardless of SES.
 
 ## Parameter Table
 
@@ -716,7 +716,7 @@ knitr::kable(bs_exp, booktabs = TRUE, longtable = TRUE, format = "latex",
 
 All analysis performed in R (version $\geq$ 4.3). Scripts in `R/` directory, executed from the `CIM_Model/` working directory. All scripts source `R/constants.R` for shared targets and scenario classification (single source of truth):
 
-- `constants.R`: policy targets, winter onset (week 9), scenario classification (`POLICY_LEVERS` holds the original 15 levers + 1 context; the 7 Phase 3 robustness scenarios are classified in the robustness family of `03_hypothesis_tests.R`, plus 1 auxiliary --- 22 levers + 1 context + 1 auxiliary across the v6.4 main pipeline)
+- `constants.R`: policy targets, winter onset (week 9), scenario classification (`POLICY_LEVERS` holds the original 15 levers + 1 context; the 7 Phase 3 robustness scenarios are classified in the robustness family of `03_hypothesis_tests.R`, plus 1 auxiliary, for a total of 22 levers + 1 context + 1 auxiliary across the v6.4 main pipeline)
 - `00_setup.R`: package installation and shared constants
 - `00_run_all.R`: execute full pipeline in sequence
 - `01_load_data.R`: read and clean NetLogo CSV outputs (last-block deduplication; 23 scenarios as of Phase 3 verification round 2)
@@ -1155,7 +1155,7 @@ Beyond the four primary hypotheses, eleven additional scenarios explore targetin
 
 \FloatBarrier
 
-```{r fig_centrality_buddy, echo=FALSE, fig.scap="Four-way buddy-design comparison", fig.cap="Four-way buddy-design comparison. BuddyProgram (week-0 distance-based pairing), RandomBuddy (week-8 random selection), CentralityBuddy (week-8 degree-based pairing), and Baseline (no buddy). All three buddy variants apply an identical 8-week $+15\\%$ attendance boost; they differ only in TIME (week 0 vs week 8) and CRITERION (distance vs random vs degree). Bars: mean across 300 runs each; error bars: 95\\% CI. Both week-8 variants outperform the week-0 BuddyProgram by about $+2.1$ pp retention, while CentralityBuddy and RandomBuddy are statistically indistinguishable on all six outcomes: the active ingredient is pairing TIME, not pairing CRITERION. Full tests are reported in Appendix F.4.", fig.pos="H", out.width="92%"}
+```{r fig_centrality_buddy, echo=FALSE, fig.scap="Four-way buddy-design comparison", fig.cap="Four-way buddy-design comparison. BuddyProgram (week-0 distance-based pairing), RandomBuddy (week-8 random selection), CentralityBuddy (week-8 degree-based pairing), and Baseline (no buddy). All three buddy variants apply an identical 8-week $+15\\%$ attendance boost; they differ only in TIME (week 0 vs week 8) and CRITERION (distance vs random vs degree). Each point is the mean across 300 runs with its 95\\% CI; the figure's own footnote defines the marks and colours. Both week-8 variants outperform the week-0 BuddyProgram by about $+2.1$ pp retention, while CentralityBuddy and RandomBuddy are statistically indistinguishable on all six outcomes: the active ingredient is pairing TIME, not pairing CRITERION. Full tests are reported in Appendix F.4.", fig.pos="H", out.width="92%"}
 knitr::include_graphics("figures/fig_centrality_buddy.png")
 ```
 
@@ -1373,7 +1373,7 @@ knitr::kable(eq_display, booktabs = TRUE, format = "latex",
   )
 ```
 
-The two mechanisms produce **substantially different outcomes** (Table above). The contact-presence contagion model generates 12.5 percentage points higher retention (57.5% vs 45.1%, Cohen's *d* = 2.24, *p* < 0.001), 23% higher average motivation, and 22% lower cost per retained participant. Notably, the divergence is confined to the motivation--retention--cost pathway: language CEFR gain (*p* = 0.32) and cross-group tie ratio (*p* = 0.71) are statistically indistinguishable between the two mechanisms, so the contact-presence specification inflates motivation and retention without altering the network structure or the language trajectory. The motivation trajectories diverge from the first weeks of the simulation (Figure below), indicating a structural difference in dynamics rather than a convergent end-state.
+The two mechanisms produce **substantially different outcomes** (Table above). The contact-presence contagion model generates 12.5 percentage points higher retention (57.5% vs 45.1%, Cohen's *d* = 2.24, *p* < 0.001), 23% higher average motivation, and 22% lower cost per retained participant. The divergence is confined to the motivation--retention--cost pathway: language CEFR gain (*p* = 0.32) and cross-group tie ratio (*p* = 0.71) are statistically indistinguishable between the two mechanisms, so the contact-presence specification inflates motivation and retention without altering the network structure or the language trajectory. The motivation trajectories diverge from the first weeks of the simulation (Figure below), indicating a structural difference in dynamics rather than a convergent end-state.
 
 ```{r equifinality_fig, echo=FALSE, fig.scap="Motivation trajectories: peer influence vs. contagion", fig.cap="Motivation trajectories under tie-weighted peer influence (Baseline, blue) vs contact-presence contagion (Alternative Mechanism Benchmark, red). Shaded bands show interquartile range across runs. The mechanisms diverge from the outset and do not converge.", out.width="90%"}
 knitr::include_graphics("figures/15_equifinality_trajectories.png")
