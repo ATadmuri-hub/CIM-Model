@@ -207,6 +207,10 @@ CIM_Model/
 
 ---
 
+## Data availability
+
+The complete raw simulation output (43,713 CSV files from 14,110 BehaviorSpace runs) is archived on Zenodo: **https://doi.org/10.5281/zenodo.20668921** (CC BY 4.0). This repository ships the analysis-ready figures, tables, and precomputed outputs; the raw per-run CSVs are regenerable from `run_all_experiments.sh` and `run_all_tier3.sh`.
+
 ## Citation
 
 ```bibtex

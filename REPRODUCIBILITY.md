@@ -28,7 +28,7 @@ Each BehaviorSpace run sets a deterministic seed, `random-seed (behaviorspace-ru
 
 ### Data Availability
 
-Simulation output data (~500 MB) is excluded from the git repository via `.gitignore`. To reproduce from scratch, run `bash run_all_experiments.sh` (requires NetLogo 7.0.3 and Java 21). Alternatively, contact the author for the data archive.
+The complete simulation output (43,713 CSV files from 14,110 BehaviorSpace runs) is archived on Zenodo: https://doi.org/10.5281/zenodo.20668921 (CC BY 4.0). It is excluded from the git repository via `.gitignore` due to its size, and is fully regenerable from scratch by running `bash run_all_experiments.sh` and `bash run_all_tier3.sh` (requires NetLogo 7.0.3 and Java 21).
 
 You do NOT need to re-run the NetLogo model if you already have the data CSVs in `data/`.
 
