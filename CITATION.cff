@@ -17,7 +17,7 @@ authors:
 version: "6.4"
 date-released: "2026-06-10"
 license: MIT
-repository-code: "<REPO_URL>"
+repository-code: "https://github.com/ATadmuri-hub/CIM-Model"
 keywords:
   - agent-based modelling
   - migrant integration

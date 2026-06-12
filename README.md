@@ -21,13 +21,13 @@ CIM v6.4 simulates a structured calisthenics programme in urban public parks whe
 
 ## Requirements
 
-- **NetLogo 7.0.3** — [ccl.northwestern.edu/netlogo](https://ccl.northwestern.edu/netlogo/)
+- **NetLogo 7.0.3**: [ccl.northwestern.edu/netlogo](https://ccl.northwestern.edu/netlogo/)
 - **Java 21** (required by NetLogo 7)
 - **R ≥ 4.3** with packages installed via `R/00_setup.R`
 
-> **Two model files.** `CIM_v6_4.nlogo` is the canonical reproducibility artifact — all results, the 36 BehaviorSpace experiments, and the thesis reference this file. `CIM_v6_4_showcase.nlogo` is a presentation build with an upgraded interface (thematic shapes, park-catchment territories, thesis-palette plots, legend) for browsing and demos; its model logic is **bit-identical** to the canonical file (verified across the full 810-run sensitivity sweep). Use the canonical file to reproduce results.
+> **Two model files.** `CIM_v6_4.nlogo` is the canonical reproducibility artifact; all results, the 36 BehaviorSpace experiments, and the thesis reference this file. `CIM_v6_4_showcase.nlogo` is a presentation build with an upgraded interface (thematic shapes, park-catchment territories, thesis-palette plots, legend) for browsing and demos; its model logic is **bit-identical** to the canonical file (verified across the full 810-run sensitivity sweep). Use the canonical file to reproduce results.
 
-> **Interactive dashboard.** An exploratory web dashboard (policy ranking, animated year replay, network growth, and a browser spatial replay) lives in `viz/` and builds to `docs/` for GitHub Pages. It reads exported data only — see `viz/README.md`.
+> **Interactive dashboard.** An exploratory web dashboard (policy ranking, animated year replay, network growth, and a browser spatial replay) lives in `viz/` and builds to `docs/` for GitHub Pages. It reads exported data only; see `viz/README.md`.
 
 ---
 
@@ -37,7 +37,7 @@ CIM v6.4 simulates a structured calisthenics programme in urban public parks whe
 Open `CIM_v6_4.nlogo` in NetLogo 7.0.3. The pre-v6.4 source `CIM_v6_3.nlogo` is preserved at the repository root for reference.
 
 ### 2. Manual single run
-1. Set `config-domain` chooser to `calisthenics-istanbul` (default), `language-course-berlin`, or `custom` — for `custom`, edit `config/custom.csv` first and the model takes **every** parameter from that file. Or just click the **Load Config CSV** button to import any `.csv` as the custom config in one step (see `config/schema.md` → "Adapting to a new domain")
+1. Set `config-domain` chooser to `calisthenics-istanbul` (default), `language-course-berlin`, or `custom`. For `custom`, edit `config/custom.csv` first and the model takes **every** parameter from that file. Or just click the **Load Config CSV** button to import any `.csv` as the custom config in one step (see `config/schema.md` → "Adapting to a new domain")
 2. Set `scenario-type` chooser to desired scenario
 3. Click **Setup** → **Go**
 4. Exports written automatically to `data/{scenario}/` on run end
@@ -60,19 +60,19 @@ BehaviorSpace experiments in `CIM_v6_4.nlogo`:
 
 | Group | Experiments |
 |---|---|
-| Main pipeline — original 16 | `Baseline_300runs`, `NoIndoor_300runs`, `MinimalSupport_300runs`, `LowParkDensity_300runs`, `LowPark_topup200runs`, `WeakPeer_300runs`, `WeakPeer_topup200runs`, `SuboptimalComp_300runs`, `HighSES_300runs`, `WomenOnly_300runs`, `WomenOnly_topup200runs`, `NoIndoorMinimal_300runs`, `Targeting50_300runs`, `Targeting70_300runs`, `Targeting90_300runs`, `BuddyProgram_300runs`, `RotatingGroups_300runs`, `Winter50_300runs`, `WomenChildcare_300runs` |
-| Main pipeline — Phase 3 (7) | `Composition2_300runs`, `Composition3_300runs`, `Composition4_300runs`, `OpenPopulation_300runs`, `SuboptimalOpen_300runs`, `CentralityBuddy_300runs`, `RandomBuddy_300runs` |
+| Main pipeline, original 16 | `Baseline_300runs`, `NoIndoor_300runs`, `MinimalSupport_300runs`, `LowParkDensity_300runs`, `LowPark_topup200runs`, `WeakPeer_300runs`, `WeakPeer_topup200runs`, `SuboptimalComp_300runs`, `HighSES_300runs`, `WomenOnly_300runs`, `WomenOnly_topup200runs`, `NoIndoorMinimal_300runs`, `Targeting50_300runs`, `Targeting70_300runs`, `Targeting90_300runs`, `BuddyProgram_300runs`, `RotatingGroups_300runs`, `Winter50_300runs`, `WomenChildcare_300runs` |
+| Main pipeline, Phase 3 (7) | `Composition2_300runs`, `Composition3_300runs`, `Composition4_300runs`, `OpenPopulation_300runs`, `SuboptimalOpen_300runs`, `CentralityBuddy_300runs`, `RandomBuddy_300runs` |
 | Auxiliary | `Sensitivity_3level` (810 runs), `Equifinality_ContactContagion_100runs` (100 runs) |
 | Tier 3 framework-generality | `GammaBracket_Low_300runs` (900 runs), `GammaBracket_High_300runs` (900 runs), `Berlin_AllScenarios_300runs` (3,900 runs) |
 
 Run accounting: 23 main scenarios = 7,500 policy runs + 810 sensitivity + 100 auxiliary = 8,410 main-pipeline runs; + 5,700 Tier 3 = **14,110 runs total** (`OpenPopulation`'s 300 runs are counted once, in the 7,500).
 
 Outputs written to `data/{scenario}/` for per-scenario experiments, or `data/second_domain/{scenario}/` for the Berlin second-domain run:
-- `CIM_results_{scenario}_{run}.csv` — per-run summary metrics
-- `CIM_timeseries_{scenario}_{run}.csv` — weekly aggregate panel
-- `CIM_agents_{scenario}_{run}.csv` — agent-level cross-section
-- `CIM_panel_{scenario}_{run}.csv` — agent-week person-period panel
-- `CIM_edges_{scenario}_{run}.csv` — friendship edge list
+- `CIM_results_{scenario}_{run}.csv`: per-run summary metrics
+- `CIM_timeseries_{scenario}_{run}.csv`: weekly aggregate panel
+- `CIM_agents_{scenario}_{run}.csv`: agent-level cross-section
+- `CIM_panel_{scenario}_{run}.csv`: agent-week person-period panel
+- `CIM_edges_{scenario}_{run}.csv`: friendship edge list
 
 ### 4. R analysis pipeline
 Run from the `CIM_Model/` directory:
@@ -129,7 +129,7 @@ CIM_Model/
 ├── CIM_v6_4.nlogo              ← NetLogo model (current version, v6.4)
 ├── CIM_v6_3.nlogo              ← Archival v6.3 source (preserved for reference)
 ├── thesis_CIM_v6.Rmd           ← Thesis R Markdown document
-├── thesis_CIM_v6.pdf / .docx   ← Rendered thesis output (PDF/A-1b + Word)
+├── thesis_CIM_v6.pdf           ← Rendered thesis output (PDF/A-1b)
 ├── run_all_experiments.sh      ← Canonical headless batch runner (all experiments)
 ├── run_all_tier3.sh            ← Tier 3 experiment runner (γ-bracket, open-pop, Berlin)
 ├── README.md
@@ -161,8 +161,8 @@ CIM_Model/
 │   ├── constants.R             ← Single source of truth (targets, scenarios, palette)
 │   └── extra_agent_fate.R      ← Agent survival-landscape figure
 ├── data/                       ← Simulation CSVs + RDS cache (gitignored)
-├── figures/                    ← Generated figures (gitignored)
-└── tables/                     ← Generated tables (gitignored)
+├── figures/                    ← Generated figures (committed)
+└── tables/                     ← Generated tables (committed)
 ```
 
 ---
@@ -215,7 +215,7 @@ CIM_Model/
   title   = {Calisthenics Integration Model ({CIM} v6.4)},
   year    = {2026},
   version = {6.4},
-  url     = {<REPO_URL>}
+  url     = {https://github.com/ATadmuri-hub/CIM-Model}
 }
 ```
 
@@ -223,6 +223,6 @@ CIM_Model/
 
 ## License
 
-Dual-licensed — see `LICENSE`:
+Dual-licensed, see `LICENSE`:
 - **Software** (NetLogo model, `R/` pipeline, `config/`, shell runners): **MIT**.
 - **Thesis manuscript** (text + figures; `thesis_CIM_v6.*`): **CC BY-NC-ND 4.0**, as declared on the thesis cover and in its PDF/A metadata.

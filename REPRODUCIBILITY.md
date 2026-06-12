@@ -1,6 +1,6 @@
-# REPRODUCIBILITY — CIM v6.4
+# REPRODUCIBILITY: CIM v6.4
 
-## Project: Agent-Based Modeling of Migrant Integration Through Community Sport — Testing Program Design Before Implementation
+## Project: Agent-Based Modeling of Migrant Integration Through Community Sport: Testing Program Design Before Implementation
 
 ## System Requirements
 - **NetLogo**: 7.0.3 (simulations only; not needed to reproduce analysis)
@@ -14,13 +14,13 @@
 
 Run all commands from the `CIM_Model/` directory. The project path is plain ASCII (`Masters_Thesis/CIM_Model/`) and needs no special handling.
 
-**Path note for `run_all_experiments.sh`**: The shell script contains hardcoded macOS paths (JAVA_HOME, NetLogo JAR location, model path) that assume macOS ARM with Homebrew-installed Java 21 and NetLogo 7.0.3 in ~/Downloads. Users on other systems must update these paths via environment variables — see the script header for details.
+**Path note for `run_all_experiments.sh`**: The shell script contains hardcoded macOS paths (JAVA_HOME, NetLogo JAR location, model path) that assume macOS ARM with Homebrew-installed Java 21 and NetLogo 7.0.3 in ~/Downloads. Users on other systems must update these paths via environment variables; see the script header for details.
 
 ---
 
 ## Random Seeds
 
-Each BehaviorSpace run sets a deterministic seed — `random-seed (behaviorspace-run-number + run-start-index)` (model `setup`, ~line 357) — so every reported result is reproducible **bit-for-bit** by re-running the named experiment. Interactive (GUI) runs use a fresh seed. The v6.4 pinned regeneration (May 2026) fixed these seeds, so re-running a scenario reproduces its CSVs exactly. With 300+ replications per scenario, statistical conclusions are also robust to any change of the seed base.
+Each BehaviorSpace run sets a deterministic seed, `random-seed (behaviorspace-run-number + run-start-index)` (model `setup`, ~line 357), so every reported result is reproducible **bit-for-bit** by re-running the named experiment. Interactive (GUI) runs use a fresh seed. The v6.4 pinned regeneration (May 2026) fixed these seeds, so re-running a scenario reproduces its CSVs exactly. With 300+ replications per scenario, statistical conclusions are also robust to any change of the seed base.
 
 ---
 
@@ -34,7 +34,7 @@ You do NOT need to re-run the NetLogo model if you already have the data CSVs in
 
 ### Data Completeness
 
-After the v6.4 pinned regeneration (May 2026), all 23 scenarios export full results, panel, and edge CSVs — 300 runs each, 500 for the three precision top-up scenarios (Low Park Density, Weak Peer Influence, Women-Only Groups). Per-scenario file counts are recorded in `tables/table_experiment_accounting.csv`. (Earlier releases lacked panel/edge exports for some scenarios; that gap is now closed.)
+After the v6.4 pinned regeneration (May 2026), all 23 scenarios export full results, panel, and edge CSVs: 300 runs each, 500 for the three precision top-up scenarios (Low Park Density, Weak Peer Influence, Women-Only Groups). Per-scenario file counts are recorded in `tables/table_experiment_accounting.csv`. (Earlier releases lacked panel/edge exports for some scenarios; that gap is now closed.)
 
 ### Step 1: Restore R environment
 ```r
@@ -57,7 +57,7 @@ source("R/00_run_all.R")
 Rscript -e 'rmarkdown::render("thesis_CIM_v6.Rmd", output_format=c("pdf_document","word_document"))'
 ```
 
-**Requires**: `pandoc` (included with RStudio) and a LaTeX distribution (TinyTeX) for the PDF. Generates `thesis_CIM_v6.pdf` (86 pages, PDF/A-1b) and `thesis_CIM_v6.docx`.
+**Requires**: `pandoc` (included with RStudio) and a LaTeX distribution (TinyTeX) for the PDF. Generates `thesis_CIM_v6.pdf` (85 pages, PDF/A-1b) and `thesis_CIM_v6.docx`.
 
 ### Expected Outputs
 
@@ -107,7 +107,7 @@ Approximately 10–20 minutes on a standard laptop (loading ~7,500 policy runs +
 | Experiment | N runs | Purpose |
 |------------|--------|---------|
 | Sensitivity (`Sensitivity_3level`) | 810 | Global sensitivity / PRCC (3⁴ × 10) |
-| Alternative Mechanism Benchmark (Equifinality) | 100 | Mechanism sensitivity — contact-presence contagion vs tie-weighted peer influence |
+| Alternative Mechanism Benchmark (Equifinality) | 100 | Mechanism sensitivity: contact-presence contagion vs tie-weighted peer influence |
 | Tier 3 framework-generality (γ-bracket + Berlin second domain) | 5,700 | Robustness + cross-domain portability |
 
 **Grand total**: 7,500 + 810 + 100 + 5,700 = **14,110 BehaviorSpace runs**.
@@ -132,7 +132,7 @@ bash run_all_experiments.sh
 ---
 
 ## License
-MIT License — see `LICENSE` file.
+MIT License, see `LICENSE` file.
 
 ## Citation
 See `CITATION.cff` for machine-readable citation metadata.
