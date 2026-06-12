@@ -1,11 +1,32 @@
-# Agent-Based Modeling of Migrant Integration Through Community Sport
+<div align="center">
 
-**Calisthenics Integration Model (CIM v6.4)**
-Abdullah Tadmuri · UC3M Master's in Computational Social Science · 2026
+# Calisthenics Integration Model (CIM v6.4)
+
+**Agent-based modeling of migrant integration through community sport**
+*Testing program design before implementation*
+
+Abdullah Tadmuri · UC3M MSc in Computational Social Science · 2026
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20668921.svg)](https://doi.org/10.5281/zenodo.20668921)
+[![Code: MIT](https://img.shields.io/badge/code-MIT-3da639.svg)](LICENSE)
+[![Thesis: CC BY-NC-ND 4.0](https://img.shields.io/badge/thesis-CC%20BY--NC--ND%204.0-lightgrey.svg)](LICENSE)
+[![NetLogo 7.0.3](https://img.shields.io/badge/NetLogo-7.0.3-00aacc.svg)](https://ccl.northwestern.edu/netlogo/)
+[![R 4.3+](https://img.shields.io/badge/R-4.3%2B-276DC3.svg)](https://www.r-project.org/)
+[![BehaviorSpace runs](https://img.shields.io/badge/runs-14%2C110-e8702a.svg)](#how-to-reproduce)
+
+</div>
+
+<p align="center">
+  <img src="figures/agent_fate_map.png" width="840" alt="Who survives: the simulated fate of every agent across scenarios">
+</p>
+
+> An agent-based model of a structured calisthenics programme in urban public parks where migrants and locals train together. It tests which programme-design choices best retain participants and build cross-group ties, evaluated across **14,110 BehaviorSpace runs** before any real-world pilot.
+
+**Navigate:** [Overview](#overview) · [Requirements](#requirements) · [How to reproduce](#how-to-reproduce) · [Repository structure](#repository-structure) · [Scenarios](#scenarios) · [Key parameters](#key-parameters) · [Data availability](#data-availability) · [Citation](#citation) · [License](#license)
 
 ---
 
-## What this model does
+## Overview
 
 CIM v6.4 simulates a structured calisthenics programme in urban public parks where migrants and locals train together, calibrated to conditions observed in Istanbul (2013--2022), and provides a second-domain Berlin BAMF integration-course calibration for cross-domain portability testing. Over 52 weeks (1 tick = 1 week), the model tracks:
 
@@ -122,7 +143,7 @@ Produces `thesis_CIM_v6.pdf` (85 pages, PDF/A-1b).
 
 ---
 
-## File structure
+## Repository structure
 
 ```
 CIM_Model/
@@ -210,6 +231,8 @@ CIM_Model/
 ## Data availability
 
 The complete raw simulation output (43,713 CSV files from 14,110 BehaviorSpace runs) is archived on Zenodo: **https://doi.org/10.5281/zenodo.20668921** (CC BY 4.0). This repository ships the analysis-ready figures, tables, and precomputed outputs; the raw per-run CSVs are regenerable from `run_all_experiments.sh` and `run_all_tier3.sh`.
+
+---
 
 ## Citation
 
