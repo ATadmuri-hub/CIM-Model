@@ -3885,6 +3885,10 @@ The thesis identifies several directions for future work:
 **Advisor**: Prof. Anxo Sanchez
 **Date**: April 2026 (initial v6.4 release); May 2026 (Phase 3 robustness extensions + verification round 2: dose-response sweep, link-prediction validation, open-population multi-metric SNA, late-pairing buddy controls)
 
+**Open access (code, data, thesis)**:
+- Code and model repository: https://github.com/ATadmuri-hub/CIM-Model
+- Simulation dataset (DOI): https://doi.org/10.5281/zenodo.20668921
+
 **Theoretical Framework**:
 - Self-Determination Theory (Deci & Ryan, 2000) - motivation dynamics
 - Contact Hypothesis (Allport, 1954) - cross-group tie formation
@@ -3906,7 +3910,7 @@ The thesis identifies several directions for future work:
 - Adamic & Adar (2003, *Social Networks* 25:211-230): Adamic-Adar predictor used in the link-prediction validation
 - Kim et al. (2015, *The Lancet* 386:145-153): network-targeted intervention via friendship-paradox sampling; reference for the CentralityBuddy/RandomBuddy comparison (the high-degree-targeting effect did not replicate in this model; the active mechanism is pairing timing, not pairing criterion)
 
-**Full documentation**: See the accompanying thesis (86 pages) and the R analysis pipeline (33 scripts: R/00 setup through R/29 SuboptimalOpen ranking-preservation test, plus constants.R and extra_agent_fate.R) for complete methodology, validation, and results. Total simulation budget: 7,500 policy runs (16 original scenarios + 7 Phase 3 robustness extensions, all at 300-500 runs) + 810 sensitivity runs + 100 auxiliary runs = 8,410 runs in v6.4 main pipeline.
+**Full documentation**: See the accompanying thesis (85 pages) and the R analysis pipeline (33 scripts: R/00 setup through R/29 SuboptimalOpen ranking-preservation test, plus constants.R and extra_agent_fate.R) for complete methodology, validation, and results. Total simulation budget: 7,500 policy runs (16 original scenarios + 7 Phase 3 robustness extensions, all at 300-500 runs) + 810 sensitivity runs + 100 auxiliary runs = 8,410 runs in v6.4 main pipeline.
 
 @#$#@#$#@
 default
