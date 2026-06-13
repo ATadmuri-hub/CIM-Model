@@ -22,7 +22,7 @@ Abdullah Tadmuri · UC3M MSc in Computational Social Science · 2026
 
 > An agent-based model of a structured calisthenics programme in urban public parks where migrants and locals train together. It tests which programme-design choices best retain participants and build cross-group ties, evaluated across **14,110 BehaviorSpace runs** before any real-world pilot.
 
-**Navigate:** [Overview](#overview) · [Requirements](#requirements) · [How to reproduce](#how-to-reproduce) · [Repository structure](#repository-structure) · [Scenarios](#scenarios) · [Key parameters](#key-parameters) · [Data availability](#data-availability) · [Citation](#citation) · [License](#license)
+**Navigate:** [Overview](#overview) · [Requirements](#requirements) · [How to reproduce](#how-to-reproduce) · [Repository structure](#repository-structure) · [Scenarios](#scenarios) · [Key parameters](#key-parameters) · [Open access](#open-access) · [Citation](#citation) · [License](#license)
 
 ---
 
@@ -228,9 +228,16 @@ CIM_Model/
 
 ---
 
-## Data availability
+## Open access
 
-The complete raw simulation output (43,713 CSV files from 14,110 BehaviorSpace runs) is archived on Zenodo: **https://doi.org/10.5281/zenodo.20668921** (CC BY 4.0). This repository ships the analysis-ready figures, tables, and precomputed outputs; the raw per-run CSVs are regenerable from `run_all_experiments.sh` and `run_all_tier3.sh`.
+All outputs of this thesis are openly available and cross-linked:
+
+- **Code and model** (this repository): https://github.com/ATadmuri-hub/CIM-Model (MIT)
+- **Simulation dataset** (Zenodo, DOI): https://doi.org/10.5281/zenodo.20668921 (CC BY 4.0)
+- **Interactive dashboard** (GitHub Pages): https://atadmuri-hub.github.io/CIM-Model/
+- **NetLogo model** (Modeling Commons): https://modelingcommons.org/browse/one_model/7916
+
+The complete raw simulation output (43,713 CSV files from 14,110 BehaviorSpace runs) is archived on Zenodo at the DOI above. This repository ships the analysis-ready figures, tables, and precomputed outputs; the raw per-run CSVs are regenerable from `run_all_experiments.sh` and `run_all_tier3.sh`.
 
 ---
 
