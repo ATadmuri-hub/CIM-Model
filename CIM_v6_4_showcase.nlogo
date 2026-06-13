@@ -3728,6 +3728,8 @@ The winter period (weeks 9-28) is when the biggest dropout spikes occur, especia
 
 ## HOW TO USE IT
 
+**Runs in desktop NetLogo 7.0.3, not in NetLogo Web.** This model uses file input/output for its configuration system (it loads `config/*.csv` at setup) and for exporting results. NetLogo Web has no filesystem access, so it cannot compile or run this model. Download it and open it in the desktop NetLogo 7.0.3 application.
+
 ### Basic Operation
 
 1. Set parameters using the sliders on the left
